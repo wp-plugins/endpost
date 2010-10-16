@@ -16,17 +16,20 @@ $defaults = array (
 	<table class="form-table">
 		<tr valign="top"><th scope="row">The HTML to add to each post</th>
 			<td><textarea type="text" name="endpost_options[html]" style="width:500px; height:200px;"><?=html_entity_decode($options['custom-settings'] ? $options['html'] : $defaults['html']); ?></textarea><br /><span class="description">
-			Common tags are:
+			<p>
+			You may evaluate PHP code by enclosing it in ## and ##.<br />The code has to be returned in order to be displayed and has to end in a semicolon or braces.<br /><br />Example: <code>##if ($var) return "Yay!";##</code>
+			</p>
+			<b>Common tags are:</b>
 			<p>
 				%ID%,
 				%url%,
 				%post_title%,
 				%comment_count%,
-				{url} (URL encoded)
-				{post_date} (time stamped),
-				{post_time} (time stamped),
+				[[url]] (URL encoded)
+				[[post_date]] (time stamped),
+				[[post_time]] (time stamped),
 			</p>
-			More tags:
+			<b>More tags:</b>
 			<p>
 				%post_author%,
 				%post_date%,
@@ -34,11 +37,11 @@ $defaults = array (
 				%post_modified%,
 				%post_modified_gmt%,
 				%guid%,
-				{post_date_gmt} (time stamped),
-				{post_time_gmt} (time stamped),
-				{post_modified} (time stamped),
-				{post_modified_gmt} (time stamped),
-				{guid} (URL encoded),
+				[[post_date_gmt]] (time stamped),
+				[[post_time_gmt]] (time stamped),
+				[[post_modified]] (time stamped),
+				[[post_modified_gmt]] (time stamped),
+				[[guid]] (URL encoded),
 			</p>
 			<p>
 				%post_content%,

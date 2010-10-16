@@ -54,7 +54,7 @@ function endpost_post_tags($post) {
 
 // Function: Add settings page item to the admin menu
 function endpost_add_settings_page_item() {
-	add_submenu_page('options-general.php', 'EndPost Options', 'EndPost Options', 'manage_options', 'endpost-options', 'endpost_show_options');
+	add_submenu_page('options-general.php', 'EndPost Options', 'EndPost', 'manage_options', 'endpost-options', 'endpost_show_options');
 }
 
 function endpost_show_options() {
@@ -78,14 +78,14 @@ function endpost_replace_tags($input) {
 	$time_format = get_option('time_format');
 	$date_format = get_option('date_format');
 	$tags = array (
-		'{post_date}' => date($date_format, strtotime($post->post_date)),
-		'{post_date_gmt}' => date($date_format, strtotime($post->post_date_gmt)),
-		'{post_time}' => date($time_format, strtotime($post->post_date)),
-		'{post_time_gmt}' => date($time_format, strtotime($post->post_date_gmt)),
-		'{post_modified}' => date($time_format, strtotime($post->post_date)),
-		'{post_modified_gmt}' => date($time_format, strtotime($post->post_date_gmt)),
-		'{url}' => urlencode($post->url),
-		'{guid}' => urlencode($post->guid)
+		'[[post_date]]' => date($date_format, strtotime($post->post_date)),
+		'[[post_date_gmt]]' => date($date_format, strtotime($post->post_date_gmt)),
+		'[[post_time]]' => date($time_format, strtotime($post->post_date)),
+		'[[post_time_gmt]]' => date($time_format, strtotime($post->post_date_gmt)),
+		'[[post_modified]]' => date($time_format, strtotime($post->post_date)),
+		'[[post_modified_gmt]]' => date($time_format, strtotime($post->post_date_gmt)),
+		'[[url]]' => urlencode($post->url),
+		'[[guid]]' => urlencode($post->guid)
 	);
 	foreach ($tags as $key=>$val) {
 		$finds[] = $key;
@@ -94,7 +94,8 @@ function endpost_replace_tags($input) {
 	$output = $input;
 	$post = get_object_vars($post);
 	
-	$output = preg_replace('/\%([\w]+)\%/ie', '$post[\'\\1\']', $output);
+	$output = preg_replace('/\%([\w]+)\%/e', '$post[\'\\1\']', $output);
+	$output = preg_replace('/\#\#(.+)\#\#/e', 'eval(html_entity_decode(stripslashes(\'\\1\')))', $output);
 	$output = str_ireplace($finds, $replaces, $output);
 	
 	return $output;
