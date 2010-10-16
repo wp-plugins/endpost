@@ -3,7 +3,7 @@
 Plugin Name: EndPost
 Plugin URI: http://henasraf.com/projects/endpost
 Description: EndPost lets you add any custom HTML to the end of every post. You may use custom tags to be replaced with post-relevant contents to be used with custom share buttons/codes, etc.
-Version: 0.2
+Version: 0.3
 Author: Hen Asraf
 Author URI: http://henasraf.com
 License: GPL2
